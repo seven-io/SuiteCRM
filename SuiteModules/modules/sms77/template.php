@@ -8,8 +8,7 @@ require_once 'settings_form.php';
 
 global $sugar_config, $mod_strings;
 
-echo getClassicModuleTitle(
-    $mod_strings['LBL_SMS77_TEMPLATE_TITLE'], $mod_strings['LBL_SMS77_TEMPLATE_TITLE']);
+echo getClassicModuleTitle('sms77', [$mod_strings['LBL_SMS77_TEMPLATE_TITLE']]);
 
 foreach (array_keys($settingsForm) as $k)
     if (!isset($sugar_config[$k])) $sugar_config[$k] = '';
