@@ -1,54 +1,88 @@
-const phones = $('[type=phone]')
-const baseUrl = window.siteUrl
+$(function() {
+    const composeSmsDialog = $('#sms77_sms_form').dialog({
+        autoOpen: false,
+        modal: true,
+    }).on('submit', e => {
+        e.preventDefault()
 
-for (let i = 0; i < phones.length; i++) {
-    const phone = $(phones[i])
-    const callerButton = $(phone).attr('sms-button')
+        postSMS()
+    })
 
-    if (callerButton === undefined) {
-        const number = phone.text().trim()
+    const notificationDialog = $('#sms77_notification').dialog({
+        autoOpen: false,
+        buttons: {
+            OK() {
+                $(this).dialog('close')
+            },
+        },
+        // modal: true,
+    })
 
-        if (number === '') continue
+    function postSMS() {
+        const inputs = composeSmsDialog.serializeArray()
+        const getValue = name => inputs.find(input => input.name === name).value
 
-        phone.append('<img src="' + baseUrl + '/themes/SuiteP/images/p_icon_email_address_32.png" alt="Send SMS" class="sms77-send-sms" data-to="' + number + '" />')
-        $(phone).attr('sms-button', true)
-    }
-}
-
-$('img.sms77-send-sms:not(.sms77-attached)').addClass('sms77-attached').on('click', function() {
-    const number = $(this).data('to')
-
-    Swal.fire({
-        input: 'textarea',
-        showCancelButton: true,
-        text: 'Enter a message for the customer:',
-        title: number,
-    }).then(function(result) {
-        if (!result.value) {
-            fireAlert('error', 'The message is empty', 'Please enter a message')
-            return false
+        const data = {
+            from: getValue('sms77_from'),
+            id: getValue('bean_id'),
+            message: getValue('sms77_text'),
+            module: getValue('module'),
+            number: getValue('sms77_to'),
         }
 
-        $.ajax({
-            data: {
-                message: result.value,
-                number: number,
-            },
+        return $.ajax({
+            data,
             dataType: 'json',
-            success: function(json) {
-                fireAlert('100' === json.success ? 'success' : 'error', 'Notice',
-                    JSON.stringify(json, null, 2))
+            error(jqXHR, textStatus, errorThrown) {
+                SUGAR.ajaxUI.showErrorMessage(errorThrown)
+            },
+            async success([json, bean]) {
+                composeSmsDialog.dialog('close')
+                notificationDialog
+                    .text(JSON.stringify(json, null, 2))
+                    .dialog('open')
+
+                document.getElementById('sms77_sms_history')
+                    .insertAdjacentHTML('beforeend', `<div>
+                    <span class='suitepicon suitepicon-action-right'></span>
+                    ${bean.text}
+                    <small>${bean.date_entered}</small>
+                </div>`)
             },
             type: 'POST',
-            url: baseUrl + '/index.php?entryPoint=sms77',
+            url: '/index.php?entryPoint=sms77',
         })
-    }).catch(console.error)
-})
+    }
 
-function fireAlert(icon, title, text) {
-    Swal.fire({
-        icon,
-        text,
-        title,
-    })
-}
+    window.sms77_suitecrm = {
+        openSmsDialog() {
+            composeSmsDialog.dialog('open')
+        },
+    }
+
+    const attr = 'sms-button'
+    const triggerClass = 'sms77-send-sms'
+    const attachedClass = 'sms77-attached'
+
+    for (const phone of [...document.querySelectorAll('[type=phone]')]) {
+        if (phone.getAttribute(attr) !== null) continue
+
+        const to = phone.textContent.trim()
+
+        if (to === '') continue
+
+        const src = '/themes/SuiteP/images/p_icon_email_address_32.png'
+        const alt = SUGAR.language.get('Contacts', 'LBL_SMS77_SEND_SMS_VIA')
+        phone.insertAdjacentHTML('beforeend',
+            `<img alt='${alt}' class='${triggerClass}' data-to='${to}' src='${src}' title='${alt}' />`)
+        phone.setAttribute(attr, 'true')
+    }
+
+    $(`img.${triggerClass}:not(.${attachedClass})`)
+        .addClass(attachedClass)
+        .on('click', function() {
+            $('#sms77_to').val($(this).data('to'))
+
+            sms77_suitecrm.openSmsDialog()
+        })
+})

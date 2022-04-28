@@ -2,6 +2,9 @@
 
 # [sms77](https://www.sms77.io/) SMS module for Suite CRM
 
+This module requires at least PHP 7.3.
+Only tested with SuiteCRM 7.x, but it should work well with 6.x too.
+
 ## Installation
 
 - Download latest release

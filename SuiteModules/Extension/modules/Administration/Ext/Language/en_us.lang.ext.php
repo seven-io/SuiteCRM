@@ -14,4 +14,6 @@ $mod_strings['LBL_SMS77_TEMPLATE_CONFIGURATION_DESC'] = 'Contact Template Config
 
 $mod_strings['LBL_SMS77_LEAD_CONFIGURATION_TITLE'] = 'Lead Template Configuration';
 $mod_strings['LBL_SMS77_LEAD_CONFIGURATION_DESC'] = 'Lead Template Configuration';
+
+$mod_strings['LBL_SMS77_PANEL_HEADING'] = 'SMS by sms77';
 ?>

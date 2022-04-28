@@ -1,12 +1,15 @@
 <?php
+global $app_list_strings, $app_strings, $current_user, $mod_strings, $sugar_config;
+
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 if (!is_admin($current_user) && !defined('configurator_util')) sugar_die('Admin Only');
 
+$settingsForm = [];
+
 require_once 'modules/Configurator/Configurator.php';
 require_once 'include/Sugar_Smarty.php';
-require_once 'settings_form.php';
+require_once 'settings_form.php'; // populates $settingsForm
 
-global $sugar_config, $mod_strings;
 
 echo getClassicModuleTitle('sms77', [$mod_strings['LBL_SMS77_TITLE']]);
 
@@ -26,11 +29,11 @@ if (!empty($_POST['save'])) {
 
 $administration->retrieveSettings();
 
-$sugar_smarty = new Sugar_Smarty;
-$sugar_smarty->assign('MOD', $mod_strings);
-$sugar_smarty->assign('APP', $app_strings);
-$sugar_smarty->assign('APP_LIST', $app_list_strings);
-$sugar_smarty->assign('config', $configurator->config);
-$sugar_smarty->assign('sms77_config', $settingsForm);
-$sugar_smarty->assign('error', $configurator->errors);
-$sugar_smarty->display('modules/sms77/template_form_config.tpl');
+$ss = new Sugar_Smarty;
+$ss->assign('APP', $app_strings);
+$ss->assign('APP_LIST', $app_list_strings);
+$ss->assign('config', $configurator->config);
+$ss->assign('error', $configurator->errors);
+$ss->assign('MOD', $mod_strings);
+$ss->assign('sms77_config', $settingsForm);
+$ss->display('modules/sms77/template_form_config.tpl');

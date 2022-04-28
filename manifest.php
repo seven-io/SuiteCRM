@@ -13,6 +13,12 @@ $manifest = [
             '7\.[0-9]\.\d',
         ],
     ],
+    'acceptable_suitecrm_versions' => [
+        'regex_matches' => [
+            '6\.[0-9]{1,2}\.\d',
+            '7\.[0-9]{1,2}\.\d',
+        ],
+    ],
     'author' => 'sms77 e.K.',
     'description' => 'Send SMS via sms77',
     'icon' => 'logo.svg',
@@ -23,58 +29,68 @@ $manifest = [
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.0.1',
+    'version' => 'v0.2.0',
 ];
 
 $installdefs = [
-    'administration' => [],
-    'copy' => [
+    'beans' => [
         [
-            'from' => '<basepath>/SuiteModules/Extension/modules/Administration/Ext/',
-            'to' => 'custom/Extension/modules/Administration/Ext',
+            'class' => 'sms77_sms',
+            'module' => 'sms77_sms',
+            'path' => 'modules/sms77_sms/sms77_sms.php',
+            'tab' => false,
         ],
         [
-            'from' => '<basepath>/SuiteModules/Extension/modules/Users/Ext/Language',
-            'to' => 'custom/Extension/modules/Users/Ext/Language',
+            'class' => 'sms77_sms_inbound',
+            'module' => 'sms77_sms_inbound',
+            'path' => 'modules/sms77_sms_inbound/sms77_sms_inbound.php',
+            'tab' => false,
+        ],
+    ],
+    'copy' => [
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Administration',
+            'to' => 'custom/Extension/modules/Administration',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Users',
+            'to' => 'custom/Extension/modules/Users',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/sms77',
             'to' => 'modules/sms77',
         ],
         [
-            'from' => '<basepath>/SuiteModules/EntryPoint/sms77.php',
-            'to' => 'custom/Extension/application/Ext/EntryPointRegistry/sms77.php',
+            'from' => '<basepath>/SuiteModules/EntryPoint',
+            'to' => 'custom/Extension/application/Ext/EntryPointRegistry',
         ],
-    ],
-    'custom_fields' => [
         [
-            'audited' => false,
-            'comment' => '',
-            'default_value' => '',
-            'duplicate_merge' => false,
-            'help' => 'Enter Your Extension',
-            'id' => 'extension_id',
-            'importable' => true,
-            'label' => 'LBL_SMS77_EXTENSION',
-            'max_size' => 10,
-            'module' => 'Users',
-            'name' => 'sms77',
-            'reportable' => false,
-            'required' => false,
-            'type' => 'varchar',
+            'from' => '<basepath>/SuiteModules/modules/sms77_sms',
+            'to' => 'modules/sms77_sms',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/modules/sms77_sms_inbound',
+            'to' => 'modules/sms77_sms_inbound',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Contacts',
+            'to' => 'custom/Extension/modules/Contacts',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Leads',
+            'to' => 'custom/Extension/modules/Leads',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/modules/Contacts',
+            'to' => 'custom/modules/Contacts',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/modules/Leads',
+            'to' => 'custom/modules/Leads',
         ],
     ],
     'id' => 'sms77',
     'logic_hooks' => [
-        [
-            'class' => 'RenderSmsButtons',
-            'description' => 'sms77 SMS',
-            'file' => 'modules/sms77/RenderSmsButtons.php',
-            'function' => 'render',
-            'hook' => 'after_ui_footer',
-            'module' => '',
-            'order' => 100,
-        ],
         [
             'class' => 'FeedPusher',
             'description' => 'Contacts SMS Feed Pusher',
@@ -94,7 +110,6 @@ $installdefs = [
             'order' => 102,
         ],
     ],
-    'mkdir' => [],
 ];
 
 $upgrade_manifest = [];
