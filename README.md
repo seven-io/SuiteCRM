@@ -18,6 +18,7 @@ Only tested with SuiteCRM 7.x, but it should work well with 6.x too.
 - Go to a contact and click the envelope icon for composing a message.
 - Use `Contact Template Configuration`  for sending SMS when a new contact gets created.
 - Use `Lead Template Configuration`  for sending SMS when a new lead gets created.
+- For inbound SMS, add a *sms_mo* webhook pointing to /index.php?entryPoint=sms77_inbound
 
 #### Support
 
