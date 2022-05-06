@@ -15,7 +15,6 @@ $(function() {
                 $(this).dialog('close')
             },
         },
-        // modal: true,
     })
 
     function postSMS() {

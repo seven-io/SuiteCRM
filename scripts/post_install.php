@@ -9,16 +9,25 @@ function post_install() {
     foreach ([
                  'Contacts',
                  'Leads',
-                 //'Users'
+                 //'Users' // TODO add users messaging
              ] as $module) {
         $parser = ParserFactory::getParser('detailview', $module);
 
-        if (!isset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING'])) {
-            echo 'Adding tab definition for module ' . $module . '<br/>';
+        $idx = array_search(
+            ['file' => 'modules/sms77/scripts/sms.js'],
+            $parser->_viewdefs['templateMeta']['includes']
+        );
+
+        if (false === $idx) {
+            echo 'Adding includes for module ' . $module;
 
             $parser->_viewdefs['templateMeta']['includes'][] = [
                 'file' => 'modules/sms77/scripts/sms.js',
             ];
+        }
+
+        if (!isset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING'])) {
+            echo 'Adding tab definition for module ' . $module . '<br/>';
 
             $parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING'] = [
                 'newTab' => true,
@@ -49,17 +58,7 @@ function post_install() {
             ];
         }
 
-        $parser->handleSave(false); //$parser->handleSave(false);
-        /*
-                if (!isset($parser->_viewdefs['panels']['LBL_SMS77_PANEL'])) {
-                    $parser->_viewdefs['panels']['LBL_SMS77_PANEL'] = [
-                        [
-                            [
-                                'name' => 'sms77',
-                            ],
-                        ],
-                    ];
-                }*/
+        $parser->handleSave(false);
     }
 
     (new RepairAndClear)->repairAndClearAll(

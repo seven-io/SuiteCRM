@@ -8,24 +8,31 @@ function pre_uninstall() {
     foreach ([
                  'Contacts',
                  'Leads',
-                 //'Users'
+                 //'Users', // TODO add users messaging
              ] as $module) {
         $parser = ParserFactory::getParser('detailview', $module);
 
-        $jsIdx = array_search(['file' => 'modules/sms77/scripts/sms.js'], $parser->_viewdefs['templateMeta']['includes']);
-        echo '$jsIdx: ' . $jsIdx . '<br/>';
-        $GLOBALS['log']->debug('$jsIdx ' . $jsIdx);
+        $idx = array_search(
+            ['file' => 'modules/sms77/scripts/sms.js'],
+            $parser->_viewdefs['templateMeta']['includes']
+        );
 
-        if (false !== $jsIdx) unset($parser->_viewdefs['templateMeta']['includes'][$jsIdx]);
+        if (false !== $idx) {
+            echo 'Removing includes for module ' . $module;
+            unset($parser->_viewdefs['templateMeta']['includes'][$idx]);
+        }
 
         $parser->_viewdefs['templateMeta']['includes'][] = [
             'file' => 'modules/sms77/scripts/sms.js',
         ];
 
-        if (isset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING']))
+        if (isset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING'])) {
+            echo 'Removing tabDefs for module ' . $module;
             unset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING']);
+        }
 
         if (isset($parser->_viewdefs['panels']['LBL_SMS77_PANEL'])) {
+            echo 'Removing panels for module ' . $module;
             unset($parser->_viewdefs['panels']['LBL_SMS77_PANEL']);
         }
 
