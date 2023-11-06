@@ -2,7 +2,7 @@
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once 'modules/Contacts/views/view.detail.php';
-require_once 'modules/sms77/sms77_util.php';
+require_once 'modules/seven/seven_util.php';
 
 class CustomContactsViewDetail extends ContactsViewDetail {
     public function display() {
@@ -16,22 +16,22 @@ class CustomContactsViewDetail extends ContactsViewDetail {
 
         /** @var Contact $contact */
         $contact = $this->bean;
-        $this->ss->assign('SMS77_BEAN_ID', $this->bean->id);
-        $this->ss->assign('SMS77_FROM', $sugar_config['sms77_sender'] ?? '');
-        $this->ss->assign('SMS77_MODULE', $this->module);
-        $this->ss->assign('SMS77_SMS_HISTORY', $history);
-        $this->ss->assign('SMS77_TO', $contact->phone_mobile);
+        $this->ss->assign('SEVEN_BEAN_ID', $this->bean->id);
+        $this->ss->assign('SEVEN_FROM', $sugar_config['seven_sender'] ?? '');
+        $this->ss->assign('SEVEN_MODULE', $this->module);
+        $this->ss->assign('SEVEN_SMS_HISTORY', $history);
+        $this->ss->assign('SEVEN_TO', $contact->phone_mobile);
 
-        echo $this->ss->fetch('modules/sms77/tpls/sms_compose.tpl');
+        echo $this->ss->fetch('modules/seven/tpls/sms_compose.tpl');
 
         parent::display();
     }
 
     private function getInboundSms(): array {
-        return sms77_util::getSMS('sms77_sms_inbound', $this->bean);
+        return seven_util::getSMS('seven_sms_inbound', $this->bean);
     }
 
     private function getOutboundSms(): array {
-        return sms77_util::getSMS('sms77_sms', $this->bean);
+        return seven_util::getSMS('seven_sms', $this->bean);
     }
 }

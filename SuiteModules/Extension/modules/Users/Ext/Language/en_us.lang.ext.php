@@ -3,8 +3,8 @@
 
 if (!isset($mod_strings)) $mod_strings = [];
 
-$mod_strings['LBL_SMS77_EXTENSION'] = 'sms77 Extension';
-$mod_strings['LBL_SMS77_PANEL'] = 'SMS';
+$mod_strings['LBL_SEVEN_EXTENSION'] = 'seven Extension';
+$mod_strings['LBL_SEVEN_PANEL'] = 'SMS';
 
 $mod_strings['LBL_ENTER_ACTIVATION_KEY'] = 'Enter Activation Key';
 $mod_strings['LBL_SERIAL_KEY'] = 'Serial ID';

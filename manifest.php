@@ -19,31 +19,31 @@ $manifest = [
             '7\.[0-9]{1,2}\.\d',
         ],
     ],
-    'author' => 'sms77 e.K.',
-    'description' => 'Send SMS via sms77',
+    'author' => 'seven communications GmbH & Co. KG',
+    'description' => 'Send SMS via seven',
     'icon' => 'logo.svg',
     'is_uninstallable' => true,
     'key' => '',
-    'name' => 'sms77',
-    'published_date' => 'December 06, 2021',
+    'name' => 'seven',
+    'published_date' => 'November 06, 2023',
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.2.0',
+    'version' => 'v0.3.0',
 ];
 
 $installdefs = [
     'beans' => [
         [
-            'class' => 'sms77_sms',
-            'module' => 'sms77_sms',
-            'path' => 'modules/sms77_sms/sms77_sms.php',
+            'class' => 'seven_sms',
+            'module' => 'seven_sms',
+            'path' => 'modules/seven_sms/seven_sms.php',
             'tab' => false,
         ],
         [
-            'class' => 'sms77_sms_inbound',
-            'module' => 'sms77_sms_inbound',
-            'path' => 'modules/sms77_sms_inbound/sms77_sms_inbound.php',
+            'class' => 'seven_sms_inbound',
+            'module' => 'seven_sms_inbound',
+            'path' => 'modules/seven_sms_inbound/seven_sms_inbound.php',
             'tab' => false,
         ],
     ],
@@ -57,20 +57,20 @@ $installdefs = [
             'to' => 'custom/Extension/modules/Users',
         ],
         [
-            'from' => '<basepath>/SuiteModules/modules/sms77',
-            'to' => 'modules/sms77',
+            'from' => '<basepath>/SuiteModules/modules/seven',
+            'to' => 'modules/seven',
         ],
         [
             'from' => '<basepath>/SuiteModules/EntryPoint',
             'to' => 'custom/Extension/application/Ext/EntryPointRegistry',
         ],
         [
-            'from' => '<basepath>/SuiteModules/modules/sms77_sms',
-            'to' => 'modules/sms77_sms',
+            'from' => '<basepath>/SuiteModules/modules/seven_sms',
+            'to' => 'modules/seven_sms',
         ],
         [
-            'from' => '<basepath>/SuiteModules/modules/sms77_sms_inbound',
-            'to' => 'modules/sms77_sms_inbound',
+            'from' => '<basepath>/SuiteModules/modules/seven_sms_inbound',
+            'to' => 'modules/seven_sms_inbound',
         ],
         [
             'from' => '<basepath>/SuiteModules/Extension/modules/Contacts',
@@ -89,12 +89,12 @@ $installdefs = [
             'to' => 'custom/modules/Leads',
         ],
     ],
-    'id' => 'sms77',
+    'id' => 'seven',
     'logic_hooks' => [
         [
             'class' => 'FeedPusher',
             'description' => 'Contacts SMS Feed Pusher',
-            'file' => 'modules/sms77/FeedPusher.php',
+            'file' => 'modules/seven/FeedPusher.php',
             'function' => 'pushFeed',
             'hook' => 'before_save',
             'module' => 'Contacts',
@@ -103,7 +103,7 @@ $installdefs = [
         [
             'class' => 'FeedPusher',
             'description' => 'Leads SMS Feed Pusher',
-            'file' => 'modules/sms77/FeedPusher.php',
+            'file' => 'modules/seven/FeedPusher.php',
             'function' => 'pushFeed',
             'hook' => 'before_save',
             'module' => 'Leads',

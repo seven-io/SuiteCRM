@@ -14,7 +14,7 @@ function post_install() {
         $parser = ParserFactory::getParser('detailview', $module);
 
         $idx = array_search(
-            ['file' => 'modules/sms77/scripts/sms.js'],
+            ['file' => 'modules/seven/scripts/sms.js'],
             $parser->_viewdefs['templateMeta']['includes']
         );
 
@@ -22,37 +22,37 @@ function post_install() {
             echo 'Adding includes for module ' . $module;
 
             $parser->_viewdefs['templateMeta']['includes'][] = [
-                'file' => 'modules/sms77/scripts/sms.js',
+                'file' => 'modules/seven/scripts/sms.js',
             ];
         }
 
-        if (!isset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING'])) {
+        if (!isset($parser->_viewdefs['templateMeta']['tabDefs']['LBL_SEVEN_PANEL_HEADING'])) {
             echo 'Adding tab definition for module ' . $module . '<br/>';
 
-            $parser->_viewdefs['templateMeta']['tabDefs']['LBL_SMS77_PANEL_HEADING'] = [
+            $parser->_viewdefs['templateMeta']['tabDefs']['LBL_SEVEN_PANEL_HEADING'] = [
                 'newTab' => true,
                 'panelDefault' => 'expanded',
             ];
         }
 
-        if (!isset($parser->_viewdefs['panels']['lbl_sms77_panel_heading'])) {
+        if (!isset($parser->_viewdefs['panels']['lbl_seven_panel_heading'])) {
             echo 'Adding panel for module ' . $module . '<br/>';
 
-            $parser->_viewdefs['panels']['lbl_sms77_panel_heading'] = [
+            $parser->_viewdefs['panels']['lbl_seven_panel_heading'] = [
                 [
                     [
-                        'customCode' => '{include file=\'modules/sms77/tpls/sms_history.tpl\'}',
-                        'label' => 'LBL_SMS77_MESSAGES',
-                        'name' => 'sms77_sms_history',
+                        'customCode' => '{include file=\'modules/seven/tpls/sms_history.tpl\'}',
+                        'label' => 'LBL_SEVEN_MESSAGES',
+                        'name' => 'seven_sms_history',
                     ],
                 ],
                 [
                     [
-                        'customCode' => '<button class=\'button\' onclick=\'sms77_suitecrm.openSmsDialog();\'>
-                        {$MOD.LBL_SMS77_WRITE_SMS}
+                        'customCode' => '<button class=\'button\' onclick=\'seven_suitecrm.openSmsDialog();\'>
+                        {$MOD.LBL_SEVEN_WRITE_SMS}
                     </button>',
-                        'label' => 'LBL_SMS77_TEXT',
-                        'name' => 'sms77_compose_sms',
+                        'label' => 'LBL_SEVEN_TEXT',
+                        'name' => 'seven_compose_sms',
                     ],
                 ],
             ];
@@ -68,6 +68,6 @@ function post_install() {
         true
     );
 
-    echo '<br /><p>Successfully installed module <strong>sms77</strong>!</p><br />';
+    echo '<br /><p>Successfully installed module <strong>seven</strong>!</p><br />';
 }
 

@@ -4,26 +4,26 @@
 $admin_options_defs = [];
 $admin_options_defs['Administration']['Configuration1'] = [
     'PANELSETTINGS',
-    'LBL_SMS77_CONFIGURATION_TITLE',
-    'LBL_SMS77_CONFIGURATION_DESC',
-    './index.php?module=sms77&action=index',
+    'LBL_SEVEN_CONFIGURATION_TITLE',
+    'LBL_SEVEN_CONFIGURATION_DESC',
+    './index.php?module=seven&action=index',
 ];
 $admin_options_defs['Administration']['Configuration2'] = [
     'PANELSETTINGS',
-    'LBL_SMS77_TEMPLATE_CONFIGURATION_TITLE',
-    'LBL_SMS77_TEMPLATE_CONFIGURATION_DESC',
-    './index.php?module=sms77&action=template',
+    'LBL_SEVEN_TEMPLATE_CONFIGURATION_TITLE',
+    'LBL_SEVEN_TEMPLATE_CONFIGURATION_DESC',
+    './index.php?module=seven&action=template',
 ];
 $admin_options_defs['Administration']['Configuration3'] = [
     'PANELSETTINGS',
-    'LBL_SMS77_LEAD_CONFIGURATION_TITLE',
-    'LBL_SMS77_LEAD_CONFIGURATION_DESC',
-    './index.php?module=sms77&action=lead',
+    'LBL_SEVEN_LEAD_CONFIGURATION_TITLE',
+    'LBL_SEVEN_LEAD_CONFIGURATION_DESC',
+    './index.php?module=seven&action=lead',
 ];
 
 $admin_group_header[] = [
-    'LBL_SMS77_TITLE',
-    'LBL_SMS77_DESC',
+    'LBL_SEVEN_TITLE',
+    'LBL_SEVEN_DESC',
     false,
     $admin_options_defs,
 ];
