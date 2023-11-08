@@ -75,11 +75,8 @@ class seven {
     }
 
     public function sendSMS(): array {
-        return $this->apiCall(
-            $this->getSender(),
-            $_POST['message'],
-            $this->getNumber()
-        );
+        $to = preg_replace('~\D~', '', $this->getNumber());
+        return $this->apiCall($this->getSender(), $_POST['message'], $to);
     }
 
     public function apiCall(?string $from, string $text, string $to): array {
