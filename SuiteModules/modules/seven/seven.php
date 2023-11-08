@@ -1,65 +1,22 @@
 <?php
 
 class seven {
-    /**
-     * @var bool $active
-     */
-    protected $active = false;
-
-    /**
-     * @var string|null $apiKey
-     */
-    protected $apiKey;
-
-    /**
-     * @var string|null $contact
-     */
-    protected $contact = null;
-
-    /**
-     * @var string|null $lead
-     */
-    protected $lead = null;
-
-    /**
-     * @var bool $leadActive
-     */
-    protected $leadActive = false;
-
-    /**
-     * @var string|null $leadBody
-     */
-    protected $leadBody;
-
-    /**
-     * @var string|null $number
-     */
-    protected $number;
-
+    protected bool $active = false;
+    protected ?string $apiKey = null;
+    protected ?string $contact = null;
+    protected ?string $lead = null;
+    protected bool $leadActive = false;
+    protected ?string $leadBody;
+    protected ?string $number;
     /**
      * @var Contact|Lead|null $relation
      */
     protected $relation = null;
+    protected ?string $sender;
+    protected bool $templateActive = false;
+    protected ?string $templateBody;
 
-    /**
-     * @var string|null $sender
-     */
-    protected $sender;
-
-    /**
-     * @var bool $templateActive
-     */
-    protected $templateActive = false;
-
-    /**
-     * @var string|null $templateBody
-     */
-    protected $templateBody;
-
-    /**
-     * @var bool $isDev
-     */
-    private $isDev;
+    private bool $isDev;
 
     public function __construct() {
         global $sugar_config;
@@ -125,7 +82,7 @@ class seven {
         );
     }
 
-    public function apiCall($from, $text, $to): array {
+    public function apiCall(?string $from, string $text, string $to): array {
         if (!$this->getActive()) return [null, null];
 
         $curlOpts = [
@@ -135,11 +92,7 @@ class seven {
                 'X-Api-Key: ' . $this->getApiKey(),
                 'SentWith: SuiteCRM',
             ],
-            CURLOPT_POSTFIELDS => json_encode([
-                'from' => $from,
-                'text' => $text,
-                'to' => $to,
-            ]),
+            CURLOPT_POSTFIELDS => json_encode(compact('from', 'text', 'to')),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 7500,
         ];
