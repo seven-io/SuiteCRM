@@ -10,6 +10,7 @@ class seven_sms_inbound extends Basic {
     public $date_modified;
     public $deleted;
     public $description;
+    public $employee_id; // non CRM field
     public $id;
     public $importable = false;
     public $inbound_number; // non CRM field

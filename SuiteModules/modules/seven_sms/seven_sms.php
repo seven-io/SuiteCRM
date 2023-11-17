@@ -10,6 +10,7 @@ class seven_sms extends Basic {
     public $date_modified;
     public $deleted;
     public $description;
+    public $employee_id; // non CRM field
     public $id;
     public $importable = false;
     public $lead_id; // non CRM field

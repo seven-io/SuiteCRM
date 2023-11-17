@@ -18,5 +18,8 @@ $mod_strings['LBL_SEVEN_LEAD_CONFIGURATION_DESC'] = 'Lead Template Configuration
 $mod_strings['LBL_SEVEN_ACCOUNT_CONFIGURATION_TITLE'] = 'Account Template Configuration';
 $mod_strings['LBL_SEVEN_ACCOUNT_CONFIGURATION_DESC'] = 'Account Template Configuration';
 
+$mod_strings['LBL_SEVEN_EMPLOYEE_CONFIGURATION_TITLE'] = 'Employee Template Configuration';
+$mod_strings['LBL_SEVEN_EMPLOYEE_CONFIGURATION_DESC'] = 'Employee Template Configuration';
+
 $mod_strings['LBL_SEVEN_PANEL_HEADING'] = 'SMS by seven';
 ?>

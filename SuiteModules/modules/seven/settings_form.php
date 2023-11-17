@@ -29,6 +29,16 @@ $settingsForm['seven_lead_body'] = [
     'placeholder' => 'Lead SMS content',
 ];
 
+$settingsForm['seven_employee_active'] = [
+    'default' => 'no',
+    'placeholder' => '',
+];
+
+$settingsForm['seven_employee_body'] = [
+    'default' => '',
+    'placeholder' => 'Employee SMS content',
+];
+
 $settingsForm['seven_sender'] = [
     'default' => '',
     'placeholder' => 'Sender',

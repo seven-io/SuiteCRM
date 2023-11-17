@@ -70,8 +70,7 @@ $(function() {
         if (to === '') continue
 
         const src = '/themes/SuiteP/images/p_icon_email_address_32.png'
-        const moduleName = get_module_name()
-        const alt = SUGAR.language.get(moduleName, 'LBL_SEVEN_SEND_SMS_VIA')
+        const alt = SUGAR.language.get(window.module_sugar_grp1, 'LBL_SEVEN_SEND_SMS_VIA')
         phone.insertAdjacentHTML('beforeend',
             `<img alt='${alt}' class='${triggerClass}' data-to='${to}' src='${src}' title='${alt}' />`)
         phone.setAttribute(attr, 'true')

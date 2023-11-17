@@ -38,7 +38,7 @@ abstract class seven_util {
         $beans = BeanFactory::newBean($module)->get_full_list();
 
         foreach ($beans as $item) {
-            /** @var Lead|Contact|Account $item */
+            /** @var Lead|Contact|Account|Employee $item */
             $key = 'Accounts' === $module ? 'phone_office' : 'phone_mobile';
             if (self::stripPhone($item->$key) === $phone) {
                 $bean = $item;

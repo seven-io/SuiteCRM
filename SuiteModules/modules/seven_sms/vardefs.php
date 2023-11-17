@@ -23,6 +23,15 @@ $dictionary['seven_sms'] = [
             'type' => 'char',
             'vname' => 'LBL_CONTACT_ID',
         ],
+        'employee_id' => [
+            'audited' => false,
+            'comment' => 'The receiving employee',
+            'isnull' => true,
+            'len' => '36',
+            'name' => 'employee_id',
+            'type' => 'char',
+            'vname' => 'LBL_EMPLOYEE_ID',
+        ],
         'lead_id' => [
             'audited' => false,
             'comment' => 'The receiving lead',

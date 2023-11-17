@@ -2,19 +2,24 @@
 
 if (!defined('sugarEntry')) define('sugarEntry', true);
 
+/** @noinspection PhpUnused */
 function post_install() {
     require_once 'modules/ModuleBuilder/parsers/ParserFactory.php';
     require_once 'modules/Administration/QuickRepairAndRebuild.php';
 
     foreach ([
-                 'Contacts',
-                 'Leads',
                  'Accounts',
-                 //'Users' // TODO add users messaging
+                 'Contacts',
+                 'Employees',
+                 'Leads',
              ] as $module) {
         $parser = ParserFactory::getParser('detailview', $module);
 
-        $idx = array_search(
+        if (!isset($parser->_viewdefs['templateMeta']['includes'])) {
+            $parser->_viewdefs['templateMeta']['includes'] = [];
+        }
+
+        $idx = in_array(
             ['file' => 'modules/seven/scripts/sms.js'],
             $parser->_viewdefs['templateMeta']['includes']
         );

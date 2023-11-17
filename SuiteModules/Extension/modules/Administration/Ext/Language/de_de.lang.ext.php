@@ -18,5 +18,8 @@ $mod_strings['LBL_SEVEN_LEAD_CONFIGURATION_DESC'] = 'Lead Vorlagen-Konfiguration
 $mod_strings['LBL_SEVEN_ACCOUNT_CONFIGURATION_TITLE'] = 'Account Vorlagen-Konfiguration';
 $mod_strings['LBL_SEVEN_ACCOUNT_CONFIGURATION_DESC'] = 'Account Vorlagen-Konfiguration';
 
+$mod_strings['LBL_SEVEN_EMPLOYEE_CONFIGURATION_TITLE'] = 'Employee Vorlagen-Konfiguration';
+$mod_strings['LBL_SEVEN_EMPLOYEE_CONFIGURATION_DESC'] = 'Employee Vorlagen-Konfiguration';
+
 $mod_strings['LBL_SEVEN_PANEL_HEADING'] = 'SMS via seven';
 ?>

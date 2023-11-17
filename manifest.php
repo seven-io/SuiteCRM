@@ -30,7 +30,7 @@ $manifest = [
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.3.6',
+    'version' => 'v0.4.0',
 ];
 
 $installdefs = [
@@ -54,8 +54,20 @@ $installdefs = [
             'to' => 'custom/Extension/modules/Administration',
         ],
         [
-            'from' => '<basepath>/SuiteModules/Extension/modules/Users',
-            'to' => 'custom/Extension/modules/Users',
+            'from' => '<basepath>/SuiteModules/Extension/modules/Accounts',
+            'to' => 'custom/Extension/modules/Accounts',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Contacts',
+            'to' => 'custom/Extension/modules/Contacts',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Employees',
+            'to' => 'custom/Extension/modules/Employees',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Leads',
+            'to' => 'custom/Extension/modules/Leads',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/seven',
@@ -74,24 +86,16 @@ $installdefs = [
             'to' => 'modules/seven_sms_inbound',
         ],
         [
-            'from' => '<basepath>/SuiteModules/Extension/modules/Accounts',
-            'to' => 'custom/Extension/modules/Accounts',
-        ],
-        [
-            'from' => '<basepath>/SuiteModules/Extension/modules/Contacts',
-            'to' => 'custom/Extension/modules/Contacts',
-        ],
-        [
-            'from' => '<basepath>/SuiteModules/Extension/modules/Leads',
-            'to' => 'custom/Extension/modules/Leads',
-        ],
-        [
             'from' => '<basepath>/SuiteModules/modules/Accounts',
             'to' => 'custom/modules/Accounts',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/Contacts',
             'to' => 'custom/modules/Contacts',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/modules/Employees',
+            'to' => 'custom/modules/Employees',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/Leads',
@@ -126,6 +130,15 @@ $installdefs = [
             'hook' => 'before_save',
             'module' => 'Accounts',
             'order' => 103,
+        ],
+        [
+            'class' => 'FeedPusher',
+            'description' => 'Employees SMS Feed Pusher',
+            'file' => 'modules/seven/FeedPusher.php',
+            'function' => 'pushFeed',
+            'hook' => 'before_save',
+            'module' => 'Employees',
+            'order' => 104,
         ],
     ],
 ];

@@ -7,12 +7,15 @@ class seven {
     protected bool $active = false;
     protected ?string $apiKey = null;
     protected ?string $contact = null;
+    protected ?string $employee = null;
+    protected bool $employeeActive = false;
+    protected ?string $employeeBody;
     protected ?string $lead = null;
     protected bool $leadActive = false;
     protected ?string $leadBody;
     protected ?string $number;
     /**
-     * @var Contact|Lead|Account|null $relation
+     * @var Contact|Lead|Account|Employee|null $relation
      */
     protected $relation = null;
     protected ?string $sender;
@@ -28,13 +31,21 @@ class seven {
 
         $this->setAccountActive($sugar_config['seven_account_active'] ?? false);
         $this->setAccountBody($sugar_config['seven_account_body'] ?? '');
+
         $this->setActive($sugar_config['seven_active'] ?? false);
+
         $this->setApiKey($sugar_config['seven_api_key'] ?? '');
+
         $this->setLeadActive($sugar_config['seven_lead_active'] ?? false);
         $this->setLeadBody($sugar_config['seven_lead_body'] ?? '');
+
         $this->setSender($sugar_config['seven_sender'] ?? '');
+
         $this->setTemplateActive($sugar_config['seven_template_active'] ?? false);
         $this->setTemplateBody($sugar_config['seven_template_body'] ?? '');
+
+        $this->setEmployeeActive($sugar_config['seven_employee_active'] ?? false);
+        $this->setEmployeeBody($sugar_config['seven_employee_body'] ?? '');
 
         if ($this->isDev) openlog('seven', LOG_NDELAY | LOG_PID, LOG_LOCAL0);
     }
@@ -97,6 +108,24 @@ class seven {
         return $this;
     }
 
+    public function getEmployeeActive(): bool {
+        return $this->employeeActive;
+    }
+
+    public function setEmployeeActive(string $employeeActive): self {
+        $this->employeeActive = 'yes' === $employeeActive;
+        return $this;
+    }
+
+    public function getEmployeeBody(): ?string {
+        return $this->employeeBody;
+    }
+
+    public function setEmployeeBody(string $employeeBody): self {
+        $this->employeeBody = $employeeBody;
+        return $this;
+    }
+
     public function sendSMS(): array {
         $to = preg_replace('~\D~', '', $this->getNumber());
         return $this->apiCall($this->getSender(), $_POST['message'], $to);
@@ -129,6 +158,7 @@ class seven {
         if ($this->relation instanceof Contact) $smsBean->contact_id = $this->relation->id;
         elseif ($this->relation instanceof Lead) $smsBean->lead_id = $this->relation->id;
         elseif ($this->relation instanceof Account) $smsBean->account_id = $this->relation->id;
+        elseif ($this->relation instanceof Employee) $smsBean->employee_id = $this->relation->id;
 
         $smsBean->save();
 
@@ -177,6 +207,14 @@ class seven {
 
     public function getLeadBean() {
         return $this->lead ? BeanFactory::getBean('Leads', $this->lead) : null;
+    }
+
+    public function getAccountBean() {
+        return $this->lead ? BeanFactory::getBean('Accounts', $this->lead) : null;
+    }
+
+    public function getEmployeeBean() {
+        return $this->lead ? BeanFactory::getBean('Employees', $this->lead) : null;
     }
 
     public function getContact(): ?string {

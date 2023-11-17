@@ -2,14 +2,15 @@
 
 if (!defined('sugarEntry')) define('sugarEntry', true);
 
+/** @noinspection PhpUnused */
 function pre_uninstall() {
     require_once 'modules/ModuleBuilder/parsers/ParserFactory.php';
 
     foreach ([
-                 'Contacts',
-                 'Leads',
                  'Accounts',
-                 //'Users', // TODO add users messaging
+                 'Contacts',
+                 'Employees',
+                 'Leads',
              ] as $module) {
         $parser = ParserFactory::getParser('detailview', $module);
 
