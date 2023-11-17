@@ -9,6 +9,7 @@ function post_install() {
     foreach ([
                  'Contacts',
                  'Leads',
+                 'Accounts',
                  //'Users' // TODO add users messaging
              ] as $module) {
         $parser = ParserFactory::getParser('detailview', $module);

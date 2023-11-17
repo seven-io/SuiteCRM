@@ -1,6 +1,6 @@
 <form method='POST' action='index.php' enctype='multipart/form-data'>
     <input type='hidden' name='module' value='seven'/>
-    <input type='hidden' name='action' value='lead'/>
+    <input type='hidden' name='action' value='account'/>
 
     <span class='error'>{$error.main}</span>
 
@@ -9,28 +9,28 @@
             <td>{$MOD.LBL_SEVEN_ACTIVE}</td>
 
             <td>
-                {if empty($config.seven_lead_active)}
-                    {assign var='seven_lead_active' value=$seven_config.seven_lead_active.default}
+                {if empty($config.seven_account_active)}
+                    {assign var='seven_account_active' value=$seven_config.seven_account_active.default}
                 {else}
-                    {assign var='seven_lead_active' value=$config.seven_lead_active}
+                    {assign var='seven_account_active' value=$config.seven_account_active}
                 {/if}
 
-                <label for='seven_lead_active_yes'>{$MOD.LBL_SEVEN_YES}</label>
+                <label for='seven_account_active_yes'>{$MOD.LBL_SEVEN_YES}</label>
                 <input
-                        id='seven_lead_active_yes'
-                        name='seven_lead_active'
+                        id='seven_account_active_yes'
+                        name='seven_account_active'
                         type='radio'
                         value='yes'
-                        {if $seven_lead_active =='yes'}checked{/if}
+                        {if $seven_account_active =='yes'}checked{/if}
                 />
 
-                <label for='seven_lead_active_no'>{$MOD.LBL_SEVEN_NO}</label>
+                <label for='seven_account_active_no'>{$MOD.LBL_SEVEN_NO}</label>
                 <input
-                        id='seven_lead_active_no'
-                        name='seven_lead_active'
+                        id='seven_account_active_no'
+                        name='seven_account_active'
                         type='radio'
                         value='no'
-                        {if $seven_lead_active =='no'}checked{/if}
+                        {if $seven_account_active =='no'}checked{/if}
                 />
             </td>
         </tr>
@@ -38,20 +38,20 @@
         <tr>
             <td><label for='description'>{$MOD.LBL_SEVEN_TEXT}</label></td>
             <td>
-                {if empty($config.seven_lead_body)}
-                    {assign var='seven_lead_body' value=$seven_config.seven_lead_body.default}
+                {if empty($config.seven_account_body)}
+                    {assign var='seven_account_body' value=$seven_config.seven_account_body.default}
                 {else}
-                    {assign var='seven_lead_body' value=$config.seven_lead_body}
+                    {assign var='seven_account_body' value=$config.seven_account_body}
                 {/if}
 
                 <textarea
                         cols='80'
                         id='description'
-                        name='seven_lead_body'
+                        name='seven_account_body'
                         rows='10'
                         style='height: 1.6.em; overflow-y:auto; font-family:sans-serif,monospace; font-size:inherit;'
                         tabindex='0'
-                >{$seven_lead_body}</textarea>
+                >{$seven_account_body}</textarea>
             </td>
         </tr>
     </table>

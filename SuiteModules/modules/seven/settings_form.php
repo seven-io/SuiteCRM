@@ -1,4 +1,14 @@
 <?php
+$settingsForm['seven_account_active'] = [
+    'default' => 'no',
+    'placeholder' => '',
+];
+
+$settingsForm['seven_account_body'] = [
+    'default' => '',
+    'placeholder' => 'Account SMS content',
+];
+
 $settingsForm['seven_active'] = [
     'default' => 'yes',
     'placeholder' => '',

@@ -1,6 +1,7 @@
 <?php
 
 class seven_sms extends Basic {
+    public $account_id; // non CRM field
     public $contact_id; // non CRM field
     public $created_by;
     public $created_by_link;

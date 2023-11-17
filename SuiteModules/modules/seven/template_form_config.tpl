@@ -58,7 +58,7 @@
                     {assign var='seven_active' value=$config.seven_active}
                 {/if}
 
-                <label for='seven_active_yes'>Yes</label>
+                <label for='seven_active_yes'>{$MOD.LBL_SEVEN_YES}</label>
                 <input
                         id='seven_active_yes'
                         name='seven_active'
@@ -67,7 +67,7 @@
                         {if $seven_active =='yes'}checked{/if}
                 />
 
-                <label for='seven_active_no'>No</label>
+                <label for='seven_active_no'>{$MOD.LBL_SEVEN_NO}</label>
                 <input
                         id='seven_active_no'
                         name='seven_active'

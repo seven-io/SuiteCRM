@@ -6,6 +6,7 @@ $manifest = [
         'CORP',
         'ENT',
         'PRO',
+        'ULT',
     ],
     'acceptable_sugar_versions' => [
         'regex_matches' => [
@@ -25,11 +26,11 @@ $manifest = [
     'is_uninstallable' => true,
     'key' => '',
     'name' => 'seven',
-    'published_date' => 'November 06, 2023',
+    'published_date' => 'November 17, 2023',
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.3.0',
+    'version' => 'v0.3.6',
 ];
 
 $installdefs = [
@@ -73,12 +74,20 @@ $installdefs = [
             'to' => 'modules/seven_sms_inbound',
         ],
         [
+            'from' => '<basepath>/SuiteModules/Extension/modules/Accounts',
+            'to' => 'custom/Extension/modules/Accounts',
+        ],
+        [
             'from' => '<basepath>/SuiteModules/Extension/modules/Contacts',
             'to' => 'custom/Extension/modules/Contacts',
         ],
         [
             'from' => '<basepath>/SuiteModules/Extension/modules/Leads',
             'to' => 'custom/Extension/modules/Leads',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/modules/Accounts',
+            'to' => 'custom/modules/Accounts',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/Contacts',
@@ -108,6 +117,15 @@ $installdefs = [
             'hook' => 'before_save',
             'module' => 'Leads',
             'order' => 102,
+        ],
+        [
+            'class' => 'FeedPusher',
+            'description' => 'Accounts SMS Feed Pusher',
+            'file' => 'modules/seven/FeedPusher.php',
+            'function' => 'pushFeed',
+            'hook' => 'before_save',
+            'module' => 'Accounts',
+            'order' => 103,
         ],
     ],
 ];

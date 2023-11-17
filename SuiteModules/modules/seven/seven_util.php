@@ -35,10 +35,12 @@ abstract class seven_util {
 
     public static function getBeanByPhone(string $module, string $phone): ?SugarBean {
         $bean = null;
+        $beans = BeanFactory::newBean($module)->get_full_list();
 
-        foreach ((BeanFactory::newBean($module))->get_full_list() as $item) {
-            /** @var Lead|Contact $item */
-            if (self::stripPhone($item->phone_mobile) === $phone) {
+        foreach ($beans as $item) {
+            /** @var Lead|Contact|Account $item */
+            $key = 'Accounts' === $module ? 'phone_office' : 'phone_mobile';
+            if (self::stripPhone($item->$key) === $phone) {
                 $bean = $item;
                 break;
             }

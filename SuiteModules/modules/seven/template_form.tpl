@@ -58,7 +58,7 @@
 
     <p>
         <span class='text-danger'>Notice: </span>
-        If active, a SMS gets sent when a new <i>Contact</i> gets created.
+        If active, an SMS gets sent when a new <i>Contact</i> gets created.
     </p>
 
     <p>

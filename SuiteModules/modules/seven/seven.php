@@ -1,6 +1,9 @@
 <?php
 
 class seven {
+    protected ?string $account = null;
+    protected bool $accountActive = false;
+    protected ?string $accountBody;
     protected bool $active = false;
     protected ?string $apiKey = null;
     protected ?string $contact = null;
@@ -9,7 +12,7 @@ class seven {
     protected ?string $leadBody;
     protected ?string $number;
     /**
-     * @var Contact|Lead|null $relation
+     * @var Contact|Lead|Account|null $relation
      */
     protected $relation = null;
     protected ?string $sender;
@@ -23,6 +26,8 @@ class seven {
 
         $this->isDev = true === ($sugar_config['developerMode'] ?? false);
 
+        $this->setAccountActive($sugar_config['seven_account_active'] ?? false);
+        $this->setAccountBody($sugar_config['seven_account_body'] ?? '');
         $this->setActive($sugar_config['seven_active'] ?? false);
         $this->setApiKey($sugar_config['seven_api_key'] ?? '');
         $this->setLeadActive($sugar_config['seven_lead_active'] ?? false);
@@ -56,6 +61,24 @@ class seven {
         return $this;
     }
 
+    public function getAccountActive(): bool {
+        return $this->accountActive;
+    }
+
+    public function setAccountActive(string $accountActive): self {
+        $this->accountActive = 'yes' === $accountActive;
+        return $this;
+    }
+
+    public function getAccountBody(): ?string {
+        return $this->accountBody;
+    }
+
+    public function setAccountBody(string $accountBody): self {
+        $this->accountBody = $accountBody;
+        return $this;
+    }
+
     public function getLeadActive(): bool {
         return $this->leadActive;
     }
@@ -86,8 +109,8 @@ class seven {
             CURLOPT_HTTPHEADER => [
                 'Accept: application/json',
                 'Content-type: application/json',
-                'X-Api-Key: ' . $this->getApiKey(),
                 'SentWith: SuiteCRM',
+                'X-Api-Key: ' . $this->getApiKey(),
             ],
             CURLOPT_POSTFIELDS => json_encode(compact('from', 'text', 'to')),
             CURLOPT_RETURNTRANSFER => true,
@@ -105,6 +128,8 @@ class seven {
         $smsBean->text = $text;
         if ($this->relation instanceof Contact) $smsBean->contact_id = $this->relation->id;
         elseif ($this->relation instanceof Lead) $smsBean->lead_id = $this->relation->id;
+        elseif ($this->relation instanceof Account) $smsBean->account_id = $this->relation->id;
+
         $smsBean->save();
 
         return [json_decode($response, true), $smsBean->toArray()];

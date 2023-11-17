@@ -7,6 +7,30 @@ require_once 'modules/seven/seven_util.php';
 class FeedPusher extends FeedLogicBase {
     public $module = 'Contacts';
 
+    protected function init($bean): array {
+        global $sms;
+
+        $relation = $bean;
+        if ('Contacts' === $this->module) {
+            $templateActive = $sms->getTemplateActive();
+            $template = $sms->getTemplateBody();
+        } elseif ('Leads' === $this->module) {
+            $templateActive = $sms->getLeadActive();
+            $template = $sms->getLeadBody();
+        } elseif ('Accounts' === $this->module) {
+            $templateActive = $sms->getLeadActive();
+            $template = $sms->getLeadBody();
+        } else {
+            $templateActive = false;
+            $template = '';
+            $relation = null;
+        }
+
+        $sms->setRelation($relation);
+
+        return [$template, $templateActive];
+    }
+
     public function pushFeed($bean, $event, $arguments) {
         global $locale, $sms;
 
@@ -21,27 +45,49 @@ class FeedPusher extends FeedLogicBase {
         $fullName = $locale->getLocaleFormattedName($bean->first_name, $bean->last_name);
         $fullName = trim($fullName);
         [$firstName, $lastName] = explode(' ', $fullName);
-
-        $relation = $bean;
-        if ('Contacts' === $this->module) {
-            $templateActive = $sms->getTemplateActive();
-            $template = $sms->getTemplateBody();
-        } elseif ('Leads' === $this->module) {
-            $templateActive = $sms->getLeadActive();
-            $template = $sms->getLeadBody();
-        } else {
-            $templateActive = false;
-            $template = '';
-            $relation = null;
-        }
-
-        $sms->setRelation($relation);
+        [$template, $templateActive] = $this->init($bean);
 
         if ($templateActive) {
             $numbers = seven_util::getValidPhoneNumbers([$mobilePhone, $officePhone]);
 
+            $accountPlaceholders = [
+                '{account_type}' => $bean->account_type,
+                '{annual_revenue}' => $bean->annual_revenue,
+                '{assigned_user_id}' => $bean->assigned_user_id,
+                '{billing_address_city}' => $bean->billing_address_city,
+                '{billing_address_country}' => $bean->billing_address_country,
+                '{billing_address_postalcode}' => $bean->billing_address_postalcode,
+                '{billing_address_state}' => $bean->billing_address_state,
+                '{billing_address_street}' => $bean->billing_address_street,
+                '{campaign_id}' => $bean->campaign_id,
+                '{created_by}' => $bean->created_by,
+                '{date_entered}' => $bean->date_entered,
+                '{date_modified}' => $bean->date_modified,
+                '{deleted}' => $bean->deleted,
+                '{description}' => $bean->description,
+                '{employees}' => $bean->employees,
+                '{id}' => $bean->id,
+                '{industry}' => $bean->industry,
+                '{modified_user_id}' => $bean->modified_user_id,
+                '{name}' => $bean->name,
+                '{ownership}' => $bean->ownership,
+                '{parent_id}' => $bean->parent_id,
+                '{phone_alternate}' => $bean->phone_alternate,
+                '{phone_fax}' => $bean->phone_fax,
+                '{phone_office}' => $bean->phone_office,
+                '{rating}' => $bean->rating,
+                '{shipping_address_city}' => $bean->shipping_address_city,
+                '{shipping_address_country}' => $bean->shipping_address_country,
+                '{shipping_address_postalcode}' => $bean->shipping_address_postalcode,
+                '{shipping_address_state}' => $bean->shipping_address_state,
+                '{shipping_address_street}' => $bean->shipping_address_street,
+                '{sic_code}' => $bean->sic_code,
+                '{ticker_symbol}' => $bean->ticker_symbol,
+                '{website}' => $bean->website,
+            ];
+
             if (count($numbers)) {
-                $msg = str_replace([
+                $search = $this->module === 'Accounts' ? array_keys($accountPlaceholders) : [
                     '{first-name}',
                     '{last-name}',
                     '{full-name}',
@@ -63,7 +109,8 @@ class FeedPusher extends FeedLogicBase {
                     '{alter-country}',
                     '{description}',
                     '{date}',
-                ], [
+                ];
+                $replace = $this->module === 'Accounts' ? array_values($accountPlaceholders) : [
                     $firstName,
                     $lastName,
                     $bean->first_name . ' ' . $bean->last_name,
@@ -85,13 +132,14 @@ class FeedPusher extends FeedLogicBase {
                     $bean->alt_address_country,
                     $bean->description,
                     date('d/m/Y'),
-                ], trim($template));
+                ];
+                $msg = str_replace($search, $replace, trim($template));
 
                 $sms->apiCall($sms->getSender(), $msg, implode(',', $numbers));
             }
         }
 
-        SugarFeed::pushFeed2('{SugarFeed.CREATED_CONTACT} [' . $bean->module_dir . ':'
-            . $bean->id . ':' . $fullName . ']', $bean);
+        SugarFeed::pushFeed2('{SugarFeed.CREATED_' . substr(strtoupper($this->module), 0, -1)
+            . '} [' . $bean->module_dir . ':' . $bean->id . ':' . $fullName . ']', $bean);
     }
 }

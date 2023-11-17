@@ -20,6 +20,12 @@ $admin_options_defs['Administration']['Configuration3'] = [
     'LBL_SEVEN_LEAD_CONFIGURATION_DESC',
     './index.php?module=seven&action=lead',
 ];
+$admin_options_defs['Administration']['Configuration4'] = [
+    'PANELSETTINGS',
+    'LBL_SEVEN_ACCOUNT_CONFIGURATION_TITLE',
+    'LBL_SEVEN_ACCOUNT_CONFIGURATION_DESC',
+    './index.php?module=seven&action=account',
+];
 
 $admin_group_header[] = [
     'LBL_SEVEN_TITLE',

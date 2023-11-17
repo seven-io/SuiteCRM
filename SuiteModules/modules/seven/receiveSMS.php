@@ -30,6 +30,13 @@ function setBeanID(seven_sms_inbound $inbound): void {
         if ($lead) {
             /** @var Lead $lead */
             $inbound->lead_id = $lead->id;
+        } else {
+            $account = seven_util::getBeanByPhone('Accounts', $phone);
+
+            if ($account) {
+                /** @var Account $account */
+                $inbound->account_id = $account->id;
+            }
         }
     }
 }

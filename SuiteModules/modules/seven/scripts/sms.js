@@ -67,11 +67,11 @@ $(function() {
         if (phone.getAttribute(attr) !== null) continue
 
         const to = phone.textContent.trim()
-
         if (to === '') continue
 
         const src = '/themes/SuiteP/images/p_icon_email_address_32.png'
-        const alt = SUGAR.language.get('Contacts', 'LBL_SEVEN_SEND_SMS_VIA')
+        const moduleName = get_module_name()
+        const alt = SUGAR.language.get(moduleName, 'LBL_SEVEN_SEND_SMS_VIA')
         phone.insertAdjacentHTML('beforeend',
             `<img alt='${alt}' class='${triggerClass}' data-to='${to}' src='${src}' title='${alt}' />`)
         phone.setAttribute(attr, 'true')

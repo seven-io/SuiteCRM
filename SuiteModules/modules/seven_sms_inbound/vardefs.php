@@ -5,6 +5,15 @@ $dictionary['seven_sms_inbound'] = [
     'comment' => 'SMS received via seven',
     'duplicate_merge' => false,
     'fields' => [
+        'account_id' => [
+            'audited' => false,
+            'comment' => 'The receiving account',
+            'isnull' => true,
+            'len' => '36',
+            'name' => 'account_id',
+            'type' => 'char',
+            'vname' => 'LBL_ACCOUNT_ID',
+        ],
         'contact_id' => [
             'audited' => false,
             'comment' => 'The receiving contact',
