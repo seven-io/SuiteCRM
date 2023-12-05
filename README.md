@@ -23,7 +23,7 @@ Only tested with SuiteCRM 7.x, but it should work well with 6.x too.
 
 ### Placeholders
 
-You can use the following placeholders in your messages:
+You can use the following placeholders in your messages (not workflows):
 
 #### Contact / Lead
 
@@ -84,6 +84,15 @@ You can use the following placeholders in your messages:
 - {sic_code}
 - {ticker_symbol}
 - {website}
+
+### Workflows
+You can use the workflow action *sevenSms* to send SMS.
+The action works with the following modules:
+- Accounts
+- Contacts
+- Employees
+- Leads
+- Users
 
 ## Support
 

@@ -26,11 +26,11 @@ $manifest = [
     'is_uninstallable' => true,
     'key' => '',
     'name' => 'seven',
-    'published_date' => 'November 17, 2023',
+    'published_date' => 'December 05, 2023',
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.4.0',
+    'version' => 'v0.5.0',
 ];
 
 $installdefs = [
@@ -68,6 +68,10 @@ $installdefs = [
         [
             'from' => '<basepath>/SuiteModules/Extension/modules/Leads',
             'to' => 'custom/Extension/modules/Leads',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/Extension/modules/AOW_Actions',
+            'to' => 'custom/Extension/modules/AOW_Actions',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/seven',
