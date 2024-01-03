@@ -14,6 +14,23 @@ if (!empty($number)) {
     }
 
     $sms->setNumber($number);
+    $res = $res = $sms->sendSMS();
 
-    echo json_encode($sms->sendSMS());
+    if (!$sms->isUserFriendlyResponses()) {
+        echo json_encode($res);
+        return;
+    }
+
+    $json = $res[0];
+    $count = 0;
+    $price = $json['total_price'];
+    foreach ($json['messages'] as $message) {
+        if (!$message['success']) continue;
+        $count++;
+    }
+
+    $text = (new \SuiteCRM\LangText)
+        ->getText('LBL_SEVEN_USER_FRIENDLY_RESPONSES_SMS', compact('count', 'price'), null, 'seven');
+
+    echo json_encode([$text, $res[1]]);
 }

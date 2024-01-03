@@ -19,6 +19,11 @@ $settingsForm['seven_api_key'] = [
     'placeholder' => 'API Key',
 ];
 
+$settingsForm['seven_user_friendly_responses'] = [
+    'default' => 'no',
+    'placeholder' => '',
+];
+
 $settingsForm['seven_lead_active'] = [
     'default' => 'no',
     'placeholder' => '',

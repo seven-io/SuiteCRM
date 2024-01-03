@@ -25,6 +25,9 @@ $mod_strings['LBL_SEVEN_TEMPLATE_ACTIVE'] = 'Active';
 $mod_strings['LBL_SEVEN_TEMPLATE_TITLE'] = 'Contact Template Configuration';
 $mod_strings['LBL_SEVEN_TITLE'] = 'seven API Configuration';
 
+$mod_strings['LBL_SEVEN_USER_FRIENDLY_RESPONSES'] = 'User friendly responses';
+$mod_strings['LBL_SEVEN_USER_FRIENDLY_RESPONSES_SMS'] = '{count} SMS dispatched for {price} €.';
+
 $mod_strings['LBL_SEVEN_EMPLOYEE_ACTIVE'] = 'Active';
 $mod_strings['LBL_SEVEN_EMPLOYEE_TITLE'] = 'Employee Template Configuration';
 

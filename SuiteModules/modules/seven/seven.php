@@ -21,6 +21,7 @@ class seven {
     protected ?string $sender;
     protected bool $templateActive = false;
     protected ?string $templateBody;
+    protected bool $userFriendlyResponses = false;
 
     private bool $isDev;
 
@@ -29,6 +30,7 @@ class seven {
 
         $this->isDev = true === ($sugar_config['developerMode'] ?? false);
 
+        $this->userFriendlyResponses = ($sugar_config['seven_user_friendly_responses'] ?? '') === 'yes';
         $this->setAccountActive($sugar_config['seven_account_active'] ?? false);
         $this->setAccountBody($sugar_config['seven_account_body'] ?? '');
 
@@ -242,5 +244,9 @@ class seven {
     public function setRelation($relation): self {
         $this->relation = $relation;
         return $this;
+    }
+
+    public function isUserFriendlyResponses(): bool {
+        return $this->userFriendlyResponses;
     }
 }

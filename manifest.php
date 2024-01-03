@@ -26,11 +26,11 @@ $manifest = [
     'is_uninstallable' => true,
     'key' => '',
     'name' => 'seven',
-    'published_date' => 'December 05, 2023',
+    'published_date' => 'January 03, 2024',
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.5.0',
+    'version' => 'v0.6.0',
 ];
 
 $installdefs = [
