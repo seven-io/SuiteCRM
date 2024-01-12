@@ -77,6 +77,36 @@
                 />
             </td>
         </tr>
+
+        <tr>
+            <td>{$MOD.LBL_SEVEN_USER_FRIENDLY_RESPONSES}</td>
+
+            <td>
+                {if empty($config.seven_user_friendly_responses)}
+                    {assign var='seven_user_friendly_responses' value=$seven_config.seven_user_friendly_responses.default}
+                {else}
+                    {assign var='seven_user_friendly_responses' value=$config.seven_user_friendly_responses}
+                {/if}
+
+                <label for='seven_user_friendly_responses_yes'>{$MOD.LBL_SEVEN_YES}</label>
+                <input
+                        id='seven_user_friendly_responses_yes'
+                        name='seven_user_friendly_responses'
+                        type='radio'
+                        value='yes'
+                        {if $seven_active =='yes'}checked{/if}
+                />
+
+                <label for='seven_user_friendly_responses_no'>{$MOD.LBL_SEVEN_NO}</label>
+                <input
+                        id='seven_user_friendly_responses_no'
+                        name='seven_user_friendly_responses'
+                        type='radio'
+                        value='no'
+                        {if $seven_active =='no'}checked{/if}
+                />
+            </td>
+        </tr>
     </table>
     <br/>
     <div>

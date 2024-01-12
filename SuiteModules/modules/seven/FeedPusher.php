@@ -14,8 +14,8 @@ class FeedPusher extends FeedLogicBase {
 
         $relation = $bean;
         if ('Contacts' === $this->module) {
-            $templateActive = $sms->getTemplateActive();
-            $template = $sms->getTemplateBody();
+            $templateActive = $sms->getContactActive();
+            $template = $sms->getContactBody();
         } elseif ('Leads' === $this->module) {
             $templateActive = $sms->getLeadActive();
             $template = $sms->getLeadBody();

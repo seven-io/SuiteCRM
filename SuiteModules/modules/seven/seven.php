@@ -19,8 +19,8 @@ class seven {
      */
     protected $relation = null;
     protected ?string $sender;
-    protected bool $templateActive = false;
-    protected ?string $templateBody;
+    protected bool $contactActive = false;
+    protected ?string $contactBody;
     protected bool $userFriendlyResponses = false;
 
     private bool $isDev;
@@ -43,8 +43,8 @@ class seven {
 
         $this->setSender($sugar_config['seven_sender'] ?? '');
 
-        $this->setTemplateActive($sugar_config['seven_template_active'] ?? false);
-        $this->setTemplateBody($sugar_config['seven_template_body'] ?? '');
+        $this->setContactActive($sugar_config['seven_contact_active'] ?? false);
+        $this->setContactBody($sugar_config['seven_contact_active'] ?? '');
 
         $this->setEmployeeActive($sugar_config['seven_employee_active'] ?? false);
         $this->setEmployeeBody($sugar_config['seven_employee_body'] ?? '');
@@ -56,21 +56,21 @@ class seven {
         if ($this->isDev) closelog();
     }
 
-    public function getTemplateActive(): bool {
-        return $this->templateActive;
+    public function getContactActive(): bool {
+        return $this->contactActive;
     }
 
-    public function setTemplateActive(string $templateActive): self {
-        $this->templateActive = 'yes' === $templateActive;
+    public function setContactActive(string $contactActive): self {
+        $this->contactActive = 'yes' === $contactActive;
         return $this;
     }
 
-    public function getTemplateBody(): ?string {
-        return $this->templateBody;
+    public function getContactBody(): ?string {
+        return $this->contactBody;
     }
 
-    public function setTemplateBody(string $templateBody): self {
-        $this->templateBody = $templateBody;
+    public function setContactBody(string $contactBody): self {
+        $this->contactBody = $contactBody;
         return $this;
     }
 

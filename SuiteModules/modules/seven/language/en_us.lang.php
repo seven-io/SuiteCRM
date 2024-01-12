@@ -11,6 +11,7 @@ $mod_strings['LBL_SEVEN_HISTORY'] = 'SMS History';
 $mod_strings['LBL_SEVEN_LEAD_ACTIVE'] = 'Active';
 $mod_strings['LBL_SEVEN_LEAD_TITLE'] = 'Lead Template Configuration';
 
+$mod_strings['LBL_SEVEN_LABEL'] = 'Label';
 $mod_strings['LBL_SEVEN_NO'] = 'No';
 $mod_strings['LBL_SEVEN_NOTICE'] = 'Notice';
 
@@ -27,6 +28,18 @@ $mod_strings['LBL_SEVEN_TITLE'] = 'seven API Configuration';
 
 $mod_strings['LBL_SEVEN_USER_FRIENDLY_RESPONSES'] = 'User friendly responses';
 $mod_strings['LBL_SEVEN_USER_FRIENDLY_RESPONSES_SMS'] = '{count} SMS dispatched for {price} €.';
+
+$mod_strings['LBL_SEVEN_CREATE'] = 'Create';
+$mod_strings['LBL_SEVEN_DELETE'] = 'Delete';
+$mod_strings['LBL_SEVEN_EDIT'] = 'Edit';
+$mod_strings['LBL_SEVEN_ARE_YOU_SURE'] = 'Are you sure?';
+
+$mod_strings['LBL_SEVEN_TEMPLATES'] = 'Templates';
+$mod_strings['LBL_SEVEN_TEMPLATES_CREATE'] = 'Create Template';
+$mod_strings['LBL_SEVEN_TEMPLATES_EDIT'] = 'Edit Template';
+$mod_strings['LBL_SEVEN_TEMPLATES_DELETE'] = 'Delete Template';
+
+$mod_strings['LBL_SEVEN_USER_TITLE'] = 'Users';
 
 $mod_strings['LBL_SEVEN_EMPLOYEE_ACTIVE'] = 'Active';
 $mod_strings['LBL_SEVEN_EMPLOYEE_TITLE'] = 'Employee Template Configuration';

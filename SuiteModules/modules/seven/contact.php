@@ -5,6 +5,7 @@ if (!is_admin($current_user) && !defined('configurator_util')) sugar_die('Admin 
 require_once 'modules/Configurator/Configurator.php';
 require_once 'include/Sugar_Smarty.php';
 require_once 'settings_form.php';
+require_once 'utils.php';
 
 global $sugar_config, $mod_strings;
 
@@ -26,14 +27,7 @@ if (!empty($_POST['save'])) {
 
 $administration->retrieveSettings();
 
-$sugar_smarty = new Sugar_Smarty;
-$sugar_smarty->assign('MOD', $mod_strings);
-$sugar_smarty->assign('APP', $app_strings);
-$sugar_smarty->assign('APP_LIST', $app_list_strings);
-$sugar_smarty->assign('config', $configurator->config);
-$sugar_smarty->assign('seven_config', $settingsForm);
-$sugar_smarty->assign('error', $configurator->errors);
-$sugar_smarty->assign('placeholders', implode('<br/>', [
+seven_smarty_render(new Contact, $configurator, 'modules/seven/contact_form.tpl', [
     '{first-name} => First Name',
     '{last-name} => last Name',
     '{full-name} => Full Name',
@@ -55,5 +49,4 @@ $sugar_smarty->assign('placeholders', implode('<br/>', [
     '{alter-country} => Alternative Country',
     '{description} => Description',
     '{date} => Date',
-]));
-$sugar_smarty->display('modules/seven/template_form.tpl');
+], $settingsForm);

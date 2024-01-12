@@ -26,11 +26,11 @@ $manifest = [
     'is_uninstallable' => true,
     'key' => '',
     'name' => 'seven',
-    'published_date' => 'January 03, 2024',
+    'published_date' => 'January 12, 2024',
     'readme' => '',
     'remove_tables' => 'prompt',
     'type' => 'module',
-    'version' => 'v0.6.0',
+    'version' => 'v0.7.0',
 ];
 
 $installdefs = [
@@ -45,6 +45,12 @@ $installdefs = [
             'class' => 'seven_sms_inbound',
             'module' => 'seven_sms_inbound',
             'path' => 'modules/seven_sms_inbound/seven_sms_inbound.php',
+            'tab' => false,
+        ],
+        [
+            'class' => 'seven_templates',
+            'module' => 'seven_templates',
+            'path' => 'modules/seven_templates/seven_templates.php',
             'tab' => false,
         ],
     ],
@@ -88,6 +94,10 @@ $installdefs = [
         [
             'from' => '<basepath>/SuiteModules/modules/seven_sms_inbound',
             'to' => 'modules/seven_sms_inbound',
+        ],
+        [
+            'from' => '<basepath>/SuiteModules/modules/seven_templates',
+            'to' => 'modules/seven_templates',
         ],
         [
             'from' => '<basepath>/SuiteModules/modules/Accounts',

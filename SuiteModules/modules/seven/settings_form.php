@@ -19,19 +19,14 @@ $settingsForm['seven_api_key'] = [
     'placeholder' => 'API Key',
 ];
 
-$settingsForm['seven_user_friendly_responses'] = [
+$settingsForm['seven_contact_active'] = [
     'default' => 'no',
     'placeholder' => '',
 ];
 
-$settingsForm['seven_lead_active'] = [
-    'default' => 'no',
-    'placeholder' => '',
-];
-
-$settingsForm['seven_lead_body'] = [
+$settingsForm['seven_contact_body'] = [
     'default' => '',
-    'placeholder' => 'Lead SMS content',
+    'placeholder' => 'Contact SMS content',
 ];
 
 $settingsForm['seven_employee_active'] = [
@@ -44,19 +39,36 @@ $settingsForm['seven_employee_body'] = [
     'placeholder' => 'Employee SMS content',
 ];
 
+$settingsForm['seven_lead_active'] = [
+    'default' => 'no',
+    'placeholder' => '',
+];
+
+$settingsForm['seven_lead_body'] = [
+    'default' => '',
+    'placeholder' => 'Lead SMS content',
+];
+
 $settingsForm['seven_sender'] = [
     'default' => '',
     'placeholder' => 'Sender',
 ];
 
-$settingsForm['seven_template_active'] = [
+$settingsForm['seven_user_active'] = [
     'default' => 'no',
     'placeholder' => '',
 ];
 
-$settingsForm['seven_template_body'] = [
+$settingsForm['seven_user_body'] = [
     'default' => '',
-    'placeholder' => 'Contact SMS content',
+    'placeholder' => 'Lead SMS content',
 ];
+
+$settingsForm['seven_user_friendly_responses'] = [
+    'default' => 'no',
+    'placeholder' => '',
+];
+
+
 
 

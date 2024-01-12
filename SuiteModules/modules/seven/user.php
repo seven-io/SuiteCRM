@@ -9,7 +9,7 @@ require_once 'utils.php';
 
 global $sugar_config, $mod_strings;
 
-echo getClassicModuleTitle('seven', [$mod_strings['LBL_SEVEN_EMPLOYEE_TITLE']]);
+echo getClassicModuleTitle('seven', [$mod_strings['LBL_SEVEN_USER_TITLE']]);
 
 foreach (array_keys($settingsForm) as $k)
     if (!isset($sugar_config[$k])) $sugar_config[$k] = '';
@@ -27,7 +27,7 @@ if (!empty($_POST['save'])) {
 
 $administration->retrieveSettings();
 
-seven_smarty_render(new Employee, $configurator, 'modules/seven/employee_form.tpl', [
+seven_smarty_render(new User, $configurator, 'modules/seven/user_form.tpl', [
     '{address_city}',
     '{address_country}',
     '{address_postalcode}',
@@ -69,5 +69,4 @@ seven_smarty_render(new Employee, $configurator, 'modules/seven/employee_form.tp
     '{title}',
     '{user_hash}',
     '{user_name}',
-
 ], $settingsForm);

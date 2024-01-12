@@ -1,91 +1,45 @@
-<form method='POST' action='index.php' enctype='multipart/form-data'>
-    <input type='hidden' name='module' value='seven'/>
-    <input type='hidden' name='action' value='lead'/>
+{extends file='modules/seven/base_form.tpl'}
+{block name=action}lead{/block}
+{block name=table}
+    <tr>
+        <td>{$MOD.LBL_SEVEN_ACTIVE}</td>
 
-    <span class='error'>{$error.main}</span>
+        <td>
+            {if empty($config.seven_lead_active)}
+                {assign var='seven_lead_active' value=$seven_config.seven_lead_active.default}
+            {else}
+                {assign var='seven_lead_active' value=$config.seven_lead_active}
+            {/if}
 
-    <table>
-        <tr>
-            <td>{$MOD.LBL_SEVEN_ACTIVE}</td>
+            <label for='seven_lead_active_yes'>{$MOD.LBL_SEVEN_YES}</label>
+            <input
+                    id='seven_lead_active_yes'
+                    name='seven_lead_active'
+                    type='radio'
+                    value='yes'
+                    {if $seven_lead_active =='yes'}checked{/if}
+            />
 
-            <td>
-                {if empty($config.seven_lead_active)}
-                    {assign var='seven_lead_active' value=$seven_config.seven_lead_active.default}
-                {else}
-                    {assign var='seven_lead_active' value=$config.seven_lead_active}
-                {/if}
+            <label for='seven_lead_active_no'>{$MOD.LBL_SEVEN_NO}</label>
+            <input
+                    id='seven_lead_active_no'
+                    name='seven_lead_active'
+                    type='radio'
+                    value='no'
+                    {if $seven_lead_active =='no'}checked{/if}
+            />
+        </td>
+    </tr>
+{/block}
+{block name=text_var}
+    {if empty($config.seven_lead_body)}
+        {assign var='seven_lead_body' value=$seven_config.seven_lead_body.default}
+    {else}
+        {assign var='seven_lead_body' value=$config.seven_lead_body}
+    {/if}
 
-                <label for='seven_lead_active_yes'>{$MOD.LBL_SEVEN_YES}</label>
-                <input
-                        id='seven_lead_active_yes'
-                        name='seven_lead_active'
-                        type='radio'
-                        value='yes'
-                        {if $seven_lead_active =='yes'}checked{/if}
-                />
-
-                <label for='seven_lead_active_no'>{$MOD.LBL_SEVEN_NO}</label>
-                <input
-                        id='seven_lead_active_no'
-                        name='seven_lead_active'
-                        type='radio'
-                        value='no'
-                        {if $seven_lead_active =='no'}checked{/if}
-                />
-            </td>
-        </tr>
-
-        <tr>
-            <td><label for='description'>{$MOD.LBL_SEVEN_TEXT}</label></td>
-            <td>
-                {if empty($config.seven_lead_body)}
-                    {assign var='seven_lead_body' value=$seven_config.seven_lead_body.default}
-                {else}
-                    {assign var='seven_lead_body' value=$config.seven_lead_body}
-                {/if}
-
-                <textarea
-                        cols='80'
-                        id='description'
-                        name='seven_lead_body'
-                        rows='10'
-                        style='height: 1.6.em; overflow-y:auto; font-family:sans-serif,monospace; font-size:inherit;'
-                        tabindex='0'
-                >{$seven_lead_body}</textarea>
-            </td>
-        </tr>
-    </table>
-
-    <p>
-        <span class='text-danger'>{$MOD.LBL_SEVEN_NOTICE}: </span>
-        {$MOD.LBL_SEVEN_SMS_ON_CREATION}
-    </p>
-
-    <p>
-        <span class='text-danger'>{$MOD.LBL_SEVEN_PROPERTY_PLACEHOLDERS}:</span>
-        <br/>
-        {$placeholders}
-    </p>
-
-    <div>
-        <input
-                class='button'
-                title='{$APP.LBL_SAVE_BUTTON_TITLE}'
-                type='submit'
-                value='{$APP.LBL_SAVE_BUTTON_LABEL}'
-                name='save'
-        />
-
-        <input
-                class='button'
-                name='cancel'
-                onclick='document.location.href="index.php?module=Administration&action=index"'
-                title='{$MOD.LBL_CANCEL_BUTTON_TITLE}'
-                type='button'
-                value='{$APP.LBL_CANCEL_BUTTON_LABEL}'
-        />
-    </div>
-</form>
+    {assign var='seven_text_name' value='seven_lead_body'}
+{/block}
 
 
 

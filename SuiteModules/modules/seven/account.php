@@ -5,6 +5,7 @@ if (!is_admin($current_user) && !defined('configurator_util')) sugar_die('Admin 
 require_once 'modules/Configurator/Configurator.php';
 require_once 'include/Sugar_Smarty.php';
 require_once 'settings_form.php';
+require_once 'utils.php';
 
 global $sugar_config, $mod_strings;
 
@@ -26,14 +27,7 @@ if (!empty($_POST['save'])) {
 
 $administration->retrieveSettings();
 
-$sugar_smarty = new Sugar_Smarty;
-$sugar_smarty->assign('MOD', $mod_strings);
-$sugar_smarty->assign('APP', $app_strings);
-$sugar_smarty->assign('APP_LIST', $app_list_strings);
-$sugar_smarty->assign('config', $configurator->config);
-$sugar_smarty->assign('seven_config', $settingsForm);
-$sugar_smarty->assign('error', $configurator->errors);
-$sugar_smarty->assign('placeholders', implode('<br/>', [
+seven_smarty_render(new Account, $configurator, 'modules/seven/account_form.tpl', [
     '{account_type} => Account Type',
     '{annual_revenue} => Annual Revenue',
     '{assigned_user_id} => Assigned User ID',
@@ -67,5 +61,5 @@ $sugar_smarty->assign('placeholders', implode('<br/>', [
     '{sic_code} => SIC Code',
     '{ticker_symbol} => Ticker Symbol',
     '{website} => Website',
-]));
-$sugar_smarty->display('modules/seven/account_form.tpl');
+], $settingsForm);
+
