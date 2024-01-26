@@ -12,12 +12,29 @@ class actionSevenSms extends actionBase {
     }
 
     public function edit_display($line, SugarBean $bean = null, $params = []) {
-        return "<input maxlength='16' name='aow_actions_param[" . $line . "][from]' placeholder='"
-            . translate('LBL_SEVENSMS_FROM', 'AOW_Actions') . "' type='tel' value=' " . $params['from']
-            . "'>"
-            . "<textarea cols='110' name='aow_actions_param[" . $line . "][text]' placeholder='"
+        $foreignId = $params['foreign_id'] ?? '';
+        $label = $params['label'] ?? '';
+        $flash = isset($params['flash']) ? 'checked=checked' : '';
+
+        return "<label for='seven_from'>" . translate('LBL_SEVENSMS_FROM', 'AOW_Actions') . "</label>
+                <input maxlength='16' id='seven_from' name='aow_actions_param[" . $line . "][from]' placeholder='"
+            . translate('LBL_SEVENSMS_FROM', 'AOW_Actions') . "' value=' " . $params['from']
+            . "'><br/>"
+            . "<label for='seven_label'>" . translate('LBL_SEVENSMS_LABEL', 'AOW_Actions') . "</label>
+                <input maxlength='100' id='seven_label' name='aow_actions_param[" . $line . "][label]' placeholder='"
+            . translate('LBL_SEVENSMS_LABEL', 'AOW_Actions') . "' value=' " . $label
+            . "'><br/>"
+            . "<label for='seven_foreign_id'>" . translate('LBL_SEVENSMS_FOREIGN_ID', 'AOW_Actions') . "</label>
+                <input maxlength='64' id='seven_foreign_id' name='aow_actions_param[" . $line . "][foreign_id]' placeholder='"
+            . translate('LBL_SEVENSMS_FOREIGN_ID', 'AOW_Actions') . "' value=' " . $foreignId
+            . "'><br/>"
+            . "<label for='seven_flash'>" . translate('LBL_SEVENSMS_FLASH', 'AOW_Actions') . "</label>
+                <input type='checkbox' id='seven_flash' name='aow_actions_param[" . $line . "][flash]' " . $flash
+            . '><br/>'
+            . "<label for='seven_text'>" . translate('LBL_SEVENSMS_TEXT', 'AOW_Actions') . "<span class='required'>*</span></label>"
+            . "<textarea cols='110' id='seven_text' name='aow_actions_param[" . $line . "][text]' placeholder='"
             . translate('LBL_SEVENSMS_TEXT', 'AOW_Actions') . "' rows='5'>" . $params['text']
-            . "</textarea>";
+            . '</textarea>';
     }
 
     protected function getPhoneFromParams(SugarBean $bean, array $params): ?string {
@@ -67,13 +84,17 @@ class actionSevenSms extends actionBase {
 
         $text = $params['text'];
         $from = $params['from'];
+        $label = $params['label'];
+        $foreign_id = $params['foreign_id'];
+        $flash = 'yes' === $params['flash'];
+        $json = compact('flash', 'foreign_id', 'from', 'label', 'text', 'to');
 
         $ch = curl_init('https://gateway.seven.io/api/sms');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(compact('from', 'text', 'to')));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($json));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
             'Content-type: application/json',
-            'X-Api-Key: ' . $sugar_config['seven_api_key'],
+            'X-Api-Key: ' . $apiKey,
         ]);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
