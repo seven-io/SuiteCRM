@@ -80,6 +80,10 @@ $installdefs = [
             'to' => 'custom/Extension/modules/AOW_Actions',
         ],
         [
+            'from' => '<basepath>/SuiteModules/custom/modules/AOW_Actions',
+            'to' => 'custom/modules/AOW_Actions',
+        ],
+        [
             'from' => '<basepath>/SuiteModules/modules/seven',
             'to' => 'modules/seven',
         ],
