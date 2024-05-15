@@ -18,15 +18,15 @@ class actionSevenSms extends actionBase {
 
         return "<label for='seven_from'>" . translate('LBL_SEVENSMS_FROM', 'AOW_Actions') . "</label>
                 <input maxlength='16' id='seven_from' name='aow_actions_param[" . $line . "][from]' placeholder='"
-            . translate('LBL_SEVENSMS_FROM', 'AOW_Actions') . "' value=' " . $params['from']
+            . translate('LBL_SEVENSMS_FROM', 'AOW_Actions') . "' value='" . $params['from']
             . "'><br/>"
             . "<label for='seven_label'>" . translate('LBL_SEVENSMS_LABEL', 'AOW_Actions') . "</label>
                 <input maxlength='100' id='seven_label' name='aow_actions_param[" . $line . "][label]' placeholder='"
-            . translate('LBL_SEVENSMS_LABEL', 'AOW_Actions') . "' value=' " . $label
+            . translate('LBL_SEVENSMS_LABEL', 'AOW_Actions') . "' value='" . $label
             . "'><br/>"
             . "<label for='seven_foreign_id'>" . translate('LBL_SEVENSMS_FOREIGN_ID', 'AOW_Actions') . "</label>
                 <input maxlength='64' id='seven_foreign_id' name='aow_actions_param[" . $line . "][foreign_id]' placeholder='"
-            . translate('LBL_SEVENSMS_FOREIGN_ID', 'AOW_Actions') . "' value=' " . $foreignId
+            . translate('LBL_SEVENSMS_FOREIGN_ID', 'AOW_Actions') . "' value='" . $foreignId
             . "'><br/>"
             . "<label for='seven_flash'>" . translate('LBL_SEVENSMS_FLASH', 'AOW_Actions') . "</label>
                 <input type='checkbox' id='seven_flash' name='aow_actions_param[" . $line . "][flash]' " . $flash
@@ -101,6 +101,6 @@ class actionSevenSms extends actionBase {
         $result = json_decode($result);
         curl_close($ch);
 
-        return 100 === $result->success;
+        return 100 == $result->success;
     }
 }

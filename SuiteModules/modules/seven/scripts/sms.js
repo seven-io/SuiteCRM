@@ -49,7 +49,7 @@ $(function() {
                 </div>`)
             },
             type: 'POST',
-            url: '/index.php?entryPoint=seven',
+            url: 'index.php?entryPoint=seven',
         })
     }
 
